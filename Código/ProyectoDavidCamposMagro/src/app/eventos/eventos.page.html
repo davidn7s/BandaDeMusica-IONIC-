@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <!--Menú-->
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <!--Botones-->
+    <ion-buttons slot="end">
+      <ion-button (click)=" listado()">
+        <ion-icon slot="icon-only" name="eye-outline"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)=" modificarEvento()" *ngIf="gestor">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Eventos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!--Título calendario-->
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h2>{{titulo}}</h2>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!--Calendario-->
+  <calendar
+    [eventSource]="eventos"
+    [calendarMode]="calendario.modo"
+    [currentDate]="calendario.fechaActual"
+    (onTitleChanged)="tituloCambiado($event)"
+  ></calendar>
+</ion-content>

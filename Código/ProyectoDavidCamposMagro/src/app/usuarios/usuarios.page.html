@@ -1,0 +1,63 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--Barra de búsqueda-->
+<ion-searchbar
+  debounce="100"
+  placeholder="Buscar usuario"
+  (ionChange)="buscar($event)"
+></ion-searchbar>
+
+<!--Select de tipo-->
+<ion-item>
+  <ion-label position="floating" color="tertiary">Tipo</ion-label>
+  <ion-select
+    [(ngModel)]="tipo"
+    (ionChange)="cambioTipo($event)"
+    interface="popover"
+    cancelText="Cancelar"
+    okText="Aceptar"
+  >
+    <ion-select-option value="todo">Todo</ion-select-option>
+    <ion-select-option value="perteneciente"
+      >Pertenece a la banda</ion-select-option
+    >
+    <ion-select-option value="noPerteneciente"
+      >No pertenece a la banda</ion-select-option
+    >
+  </ion-select>
+</ion-item>
+<ion-content>
+  <h4 class="detalleh4">Lista de Usuarios</h4>
+  <ion-list
+    *ngFor="let usuario of usuariosMuestra | filtro: textoBuscar: 'nombre'"
+  >
+    <ion-card>
+      <ion-card-content>
+        <ion-grid>
+          <!--Abrir opciones (modificación o borrado)-->
+          <ion-row (click)="opciones(usuario)">
+            <ion-col size="9">
+              {{usuario.nombre}} {{usuario.apellidos}}
+            </ion-col>
+            <!--Símbolo Checkmark si pertenece a la banda-->
+            <ion-col *ngIf="usuario.musico!=undefined" size="2">
+              <ion-icon name="checkmark-outline"></ion-icon>
+            </ion-col>
+            <!--Símbolo Close si no pertenece a la banda-->
+            <ion-col *ngIf="usuario.musico==undefined" size="2">
+              <ion-icon name="close-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

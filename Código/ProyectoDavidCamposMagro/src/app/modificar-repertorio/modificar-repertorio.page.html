@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <!--Botón cerrar modal-->
+    <ion-buttons slot="start">
+      <ion-button ion-button (click)="closeModal()"
+        ><ion-icon name="arrow-back-outline"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+    <!--Opciones de titulos-->
+    <ion-title *ngIf="partituraNueva.titulo==''">Nueva Partitura</ion-title>
+    <ion-title *ngIf="partituraNueva.titulo!=''"
+      >{{partituraNueva.titulo}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="form-content">
+  <form
+    [formGroup]="validations_form"
+    (ngSubmit)="onSubmit(validations_form.value)"
+  >
+    <ion-item>
+      <ion-label position="stacked" color="tertiary">Titulo</ion-label>
+      <input type="text" placeholder="Titulo" formControlName="titulo" />
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked" color="tertiary">Autor</ion-label>
+      <input type="text" placeholder="Autor" formControlName="autor" />
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked" color="tertiary">Enlace a audio</ion-label>
+      <input type="text" placeholder="Enlace" formControlName="audio" />
+    </ion-item>
+
+    <!--Select de tipo-->
+    <ion-item>
+      <ion-label position="floating" color="tertiary">Tipo</ion-label>
+      <ion-select formControlName="tipo">
+        <ion-select-option value="bso">BSO</ion-select-option>
+        <ion-select-option value="marcha">Marchas</ion-select-option>
+        <ion-select-option value="pasodoble">Pasodobles</ion-select-option>
+        <ion-select-option value="pasacalles">Pasacalles</ion-select-option>
+        <ion-select-option value="obra">Obras</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <!--Subir pdf-->
+    <ion-input type="text" formControlName="pdf" hidden></ion-input>
+    <ion-button color="tertiary" shape="round" size="medium">
+      <input type="file" (change)="fileOnChange($event)" />
+    </ion-button>
+
+    <!-- Boton de submit-->
+    <ion-button
+      color="tertiary"
+      class="submit-btn"
+      expand="block"
+      type="submit"
+      [disabled]="!validations_form.valid"
+    >
+      Listo</ion-button
+    >
+  </form>
+</ion-content>

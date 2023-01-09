@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar>
+    <!--Botón cerrar modal-->
+    <ion-buttons slot="start">
+      <ion-button ion-button (click)="closeModal()"
+        ><ion-icon name="arrow-back-outline"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+
+    <ion-title>Listado de Eventos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!--Barra de búsqueda-->
+<ion-searchbar
+  debounce="100"
+  placeholder="Buscar evento"
+  (ionChange)="buscar($event)"
+></ion-searchbar>
+
+<ion-content>
+  <ion-list *ngFor="let evento of eventos | filtro: textoBuscar: 'title' ">
+    <ion-card>
+      <ion-card-header>
+        <ion-row>
+          <ion-col size="10">
+            <strong>{{evento.title}}</strong>
+          </ion-col>
+          <ion-col size="1" *ngIf="gestor">
+            <button ion-button icon-only (click)="modificarEvento(evento)">
+              <ion-icon name="pencil-outline"></ion-icon></button
+          ></ion-col>
+
+          <ion-col size="1" *ngIf="gestor">
+            <button ion-button icon-only (click)="confirmar(evento)">
+              <ion-icon name="trash-outline"></ion-icon>
+            </button>
+          </ion-col>
+        </ion-row>
+      </ion-card-header>
+      <ion-card-content>
+        Inicio: {{evento.startTime}}<br />
+        Fin: {{evento.endTime}}
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

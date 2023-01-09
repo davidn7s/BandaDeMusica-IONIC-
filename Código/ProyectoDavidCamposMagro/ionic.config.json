@@ -1,0 +1,7 @@
+{
+  "name": "Banda de Música San Sebastián",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,55 @@
+<ion-header>
+  <ion-toolbar>
+    <!--Botón cerrar modal-->
+    <ion-buttons slot="start">
+      <ion-button ion-button (click)="closeModal()"
+        ><ion-icon name="arrow-back-outline"></ion-icon
+      ></ion-button>
+    </ion-buttons>
+
+    <!--Botones-->
+    <!-- Boton de submit-->
+    <ion-buttons slot="end">
+      <ion-button (click)="aceptar()" [disabled]="deshabilitar()">
+        <ion-icon slot="icon-only" name="checkmark-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <!--Opciones de titulos-->
+    <ion-title *ngIf="eventoNuevo.title==''">Nuevo Evento</ion-title>
+    <ion-title *ngIf="eventoNuevo.title!=''">{{eventoNuevo.title}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="stacked" color="tertiary">Título</ion-label>
+    <ion-input type="text" [(ngModel)]="eventoNuevo.title"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked" color="tertiary">Incio</ion-label>
+    <ion-datetime
+      locale="es-ES"
+      color="tertiary"
+      displayFormat="DD/MM/YYYY HH:min"
+      pickerFormat="DD/MM/YYYY HH:mm:ss"
+      [(ngModel)]="inicio"
+      presentation="time-date"
+      [min]="minDate"
+    ></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="stacked" color="tertiary">Final</ion-label>
+    <ion-datetime
+      locale="es-ES"
+      color="tertiary"
+      displayFormat="DD/MM/YYYY HH:min"
+      pickerFormat="MM/DD/YYYY HH:mm:ss"
+      [(ngModel)]="fin"
+      presentation="time-date"
+      [min]="minDate"
+    ></ion-datetime>
+  </ion-item>
+</ion-content>

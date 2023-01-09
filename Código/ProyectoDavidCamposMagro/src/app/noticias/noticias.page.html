@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <!--Menú-->
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <!--Botones-->
+    <ion-buttons slot="end">
+      <ion-button (click)=" modificarNoticia()" *ngIf="gestor">
+        <ion-icon slot="icon-only" name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title>Noticias</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-searchbar
+  debounce="100"
+  placeholder="Buscar noticia"
+  (ionChange)="buscar($event)"
+></ion-searchbar>
+<ion-content>
+  <ion-list *ngFor="let noticia of noticias  | filtro: textoBuscar: 'titulo'">
+    <ion-card>
+      <ion-card-header>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="10">
+              <ion-card-title> {{noticia.titulo}}</ion-card-title>
+            </ion-col>
+
+            <!--Modificación de noticia-->
+            <ion-col size="1" *ngIf="gestor">
+              <button ion-button icon-only (click)="modificarNoticia(noticia)">
+                <ion-icon name="pencil-outline"></ion-icon></button
+            ></ion-col>
+            <!--Borrado de noticia-->
+            <ion-col size="1" *ngIf="gestor">
+              <button ion-button icon-only (click)="confirmar(noticia)">
+                <ion-icon name="trash-outline"></ion-icon>
+              </button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-card-subtitle>{{noticia.fecha}}</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12">
+              <img
+                *ngIf="noticia.imagen!=''"
+                src="{{noticia.imagen}}"
+              />
+              <img
+                *ngIf="noticia.imagen==''"
+                src="..\..\assets\icon\logo.png"
+              />
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col size="12"> {{noticia.contenido}} </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+</ion-content>

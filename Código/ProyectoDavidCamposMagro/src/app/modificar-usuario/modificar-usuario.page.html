@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <!--Botón cerrar modal-->
+    <ion-buttons slot="start">
+      <ion-button ion-button (click)="closeModal()">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{usuario.nombre}} {{usuario.apellidos}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating" color="tertiary">Nombre</ion-label>
+    <ion-input type="text" [(ngModel)]="usuario.nombre"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" color="tertiary">Apellidos</ion-label>
+    <ion-input type="text" [(ngModel)]="usuario.apellidos"></ion-input>
+  </ion-item>
+
+  <!--Opciones administrador crear/modificar músico-->
+  <div *ngIf="gestor">
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="11">
+            <ion-label position="floating" color="tertiary"
+              >¿Pertenece a la banda?</ion-label
+            >
+          </ion-col>
+          <ion-col size="1">
+            <ion-checkbox
+              (ionChange)="cambio($event)"
+              [(ngModel)]="musico"
+            ></ion-checkbox>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <!--Select de categoría-->
+    <ion-item *ngIf="musico">
+      <ion-label position="floating" color="tertiary">Categoría</ion-label>
+      <ion-select [(ngModel)]="usuario.musico.categoria">
+        <ion-select-option value="musico">Músico</ion-select-option>
+        <ion-select-option value="presidente">Presidente</ion-select-option>
+        <ion-select-option value="secretario">Secretario</ion-select-option>
+        <ion-select-option value="tesorero">Tesorero</ion-select-option>
+        <ion-select-option value="vocal">Vocal</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!--Select de instrumento-->
+    <ion-item *ngIf="musico">
+      <ion-label position="floating" color="tertiary">Instrumento</ion-label>
+      <ion-select [(ngModel)]="usuario.musico.instrumento">
+        <ion-select-option value="bateria">Batería</ion-select-option>
+        <ion-select-option value="bombardino">Bombardino</ion-select-option>
+        <ion-select-option value="bombo">Bombo</ion-select-option>
+        <ion-select-option value="clarinete">Clarinete</ion-select-option>
+        <ion-select-option value="corneta">Corneta</ion-select-option>
+        <ion-select-option value="flauta">Flauta</ion-select-option>
+        <ion-select-option value="platos">Platos</ion-select-option>
+        <ion-select-option value="saxofon">Saxofón</ion-select-option>
+        <ion-select-option value="tambor">Tambor</ion-select-option>
+        <ion-select-option value="trombon">Trombón</ion-select-option>
+        <ion-select-option value="trompa">Trompa</ion-select-option>
+        <ion-select-option value="trompeta">Trompeta</ion-select-option>
+        <ion-select-option value="tuba">Tuba</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </div>
+
+  <!-- Boton de submit-->
+  <ion-button
+    color="tertiary"
+    class="submit-btn"
+    expand="block"
+    (click)="modificar()"
+    [disabled]="deshabilitado()"
+  >
+    Listo</ion-button
+  >
+</ion-content>

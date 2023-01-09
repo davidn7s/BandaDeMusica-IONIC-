@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title> Login </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label position="floating" color="tertiary">Correo Electrónico</ion-label>
+    <ion-input type="text" [(ngModel)]="correo"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" color="tertiary">Contraseña</ion-label>
+    <ion-input type="password" [(ngModel)]="contrasenna"></ion-input>
+  </ion-item>
+
+  <!--Boton de iniciar sesión-->
+  <ion-button color="tertiary" class="submit-btn" expand="block" (click)="login()" [disabled]="deshabilitado()">Iniciar
+    sesion</ion-button>
+
+  <!--Boton de registrar-->
+  <ion-button color="tertiary" class="submit-btn" expand="block" (click)=" registrar()">Registrar</ion-button>
+
+  <!--Opción anónima-->
+  <ion-grid>
+    <ion-row id="centrar">
+      <p (click)="loginCorrecto()">Iniciar como anónimo</p>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-img style="height: 13em" src="..\..\assets\icon\logo.png"></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -1,0 +1,77 @@
+<ion-app>
+  <ion-menu side="start" menuId="first" contentId="content1">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-item *ngIf="usuarioGlobal.nombre != ''">
+        <!--Datos del usuario-->
+        <ion-grid>
+          <ion-row>
+            <ion-col size="10">
+              {{ usuarioGlobal.nombre }}
+              <ion-row>
+                {{ usuarioGlobal.apellidos }}
+              </ion-row>
+            </ion-col>
+            <ion-col size="1">
+              <button ion-button icon-only (click)="ventanaModal()">
+                <ion-icon name="create-outline"></ion-icon></button
+            ></ion-col>
+            <ion-col size="1">
+              <button ion-button icon-only (click)="logOut()">
+                <ion-icon name="log-out-outline"></ion-icon></button
+            ></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+
+      <!--Menú de las páginas-->
+      <ion-list *ngFor="let pages of navigate">
+        <ion-menu-toggle auto-hide="true">
+          <ion-item [routerLink]="pages.url" routerDirection="forward">
+            <ion-icon [name]="pages.icon" slot="start"></ion-icon>
+            {{ pages.title }}
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+
+    <!--Redes sociales-->
+    <ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col
+            size="3"
+            onclick="window.open('https://www.instagram.com/banda_villaverde/','_system','Location=yes'); "
+          >
+            <ion-icon class="verde" name="logo-instagram"></ion-icon>
+          </ion-col>
+          <ion-col
+            size="3"
+            onclick="window.open('https://es-es.facebook.com/BandaDeMusicaSanSebastian/','_system','Location=yes'); "
+          >
+            <ion-icon class="verde" name="logo-facebook"></ion-icon>
+          </ion-col>
+          <ion-col
+            size="3"
+            onclick="window.open('https://www.youtube.com/user/bmsansebastian','_system','Location=yes'); "
+          >
+            <ion-icon class="verde" name="logo-youtube"></ion-icon>
+          </ion-col>
+          <ion-col
+            size="3"
+            onclick="window.open('https://twitter.com/bandavillaverde','_system','Location=yes'); "
+          >
+            <ion-icon class="verde" name="logo-twitter"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-menu>
+
+  <ion-router-outlet id="content1"></ion-router-outlet>
+</ion-app>
