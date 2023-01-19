@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { StatusBar, Style } from '@capacitor/status-bar';
 import { ModalController, Platform } from '@ionic/angular';
 import { Usuario } from 'src/modelo/Usuario';
 import { GlobalVariablesService } from 'src/services/global-variables.service';
@@ -26,10 +25,8 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private globalVar: GlobalVariablesService,
     private modalCtrl: ModalController,
-    public router: Router
-  ) {
+    public router: Router) {
     this.sideMenu();
-    this.initializeApp();
   } //end constructor
 
   //======================================================================================================================================
@@ -72,11 +69,7 @@ export class AppComponent implements OnInit {
     this.sideMenu();
   } //end getGlobalUsu
 
-  initializeApp() {
-    this.platform.ready().then(() => {
-      StatusBar.setStyle({ style: Style.Dark });
-    });
-  } //end initializeApp
+
 
   sideMenu() {
     if (

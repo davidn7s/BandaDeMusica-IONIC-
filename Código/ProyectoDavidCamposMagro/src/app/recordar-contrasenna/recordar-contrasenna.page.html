@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button color="black"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Recordar Contraseña</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  
+
+
+  <ion-item>
+    <h4>¿Has olvidado tu contraseña?</h4>
+    
+    <p>Inserte en la siguiente caja de texto al correo al que le enviaremos el enlace para reestablecer la contraseña</p>
+    <ion-label position="floating" color="tertiary">Correo Electrónico</ion-label>
+    <ion-input type="text" [(ngModel)]="correo"></ion-input>
+  </ion-item>
+
+    <!--Boton de envio de contraseña-->
+    <ion-button color="tertiary" class="submit-btn" expand="block" (click)="comprobarCorreo()" [disabled]="deshabilitado()">Enviar correo</ion-button>
+
+</ion-content>

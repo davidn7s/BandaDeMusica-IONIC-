@@ -29,10 +29,11 @@ export class HomePage {
 
   private correo: string;
   private contrasenna: string;
+  private mostrarContrassenna = false;
+  private icono = 'eye';
 
   constructor(
     private firebaseAuthService: FirebaseAuthService,
-    private router: Router,
     private toastController: ToastController,
     private modalController: ModalController,
     private fireService: FireServiceProvider,
@@ -97,6 +98,10 @@ export class HomePage {
     this.ventanaModal();
   }
 
+  contrasennaOlvidada(){
+    this.navCtrl.navigateForward('/recordar-contrasenna')
+  }
+
   async ventanaModal() {
     const modal = await this.modalController.create({
       component: RegistroPage,
@@ -123,15 +128,10 @@ export class HomePage {
   //===============
 
   deshabilitado() {
-    if (this.correo == null) return true;
-    if (this.correo == '') return true;
-    if (
-      !/^[a-zA-Z0-9_.+-]+[@]{1}[a-zA-Z0-9-]+[.]{1}[a-zA-Z]+$/.test(this.correo)
-    )
+    if (!/^[a-zA-Z0-9_.+-]+[@]{1}[a-zA-Z0-9-]+[.]{1}[a-zA-Z]+$/.test(this.correo))
       return true;
-    if (this.contrasenna == null) return true;
-    if (this.contrasenna == '') return true;
-    if (this.contrasenna.length < 6) return true;
+    if (this.contrasenna.length < 6) 
+      return true;
 
     return false;
   }//end deshabilitado
@@ -149,5 +149,15 @@ export class HomePage {
   async cerrarCarga() {
     return await this.loadingController.dismiss();
   }//end cerrarCarga
+
+  cambiarTipo() {
+    this.mostrarContrassenna = !this.mostrarContrassenna;
+
+    if (this.icono == 'eye')
+      this.icono = 'eye-off'
+    else
+      this.icono = 'eye'
+  }//end cambiarTipo
+
 
 } //end class

@@ -12,7 +12,9 @@
 
   <ion-item>
     <ion-label position="floating" color="tertiary">Contraseña</ion-label>
-    <ion-input type="password" [(ngModel)]="contrasenna"></ion-input>
+    <ion-input type="password" [(ngModel)]="contrasenna"
+      [type]="mostrarContrassenna ? 'text' : 'password'"></ion-input><ion-icon id="ojo" slot="end" [name]="icono"
+      (click)="cambiarTipo()" color="black"></ion-icon>
   </ion-item>
 
   <!--Boton de iniciar sesión-->
@@ -22,8 +24,18 @@
   <!--Boton de registrar-->
   <ion-button color="tertiary" class="submit-btn" expand="block" (click)=" registrar()">Registrar</ion-button>
 
-  <!--Opción anónima-->
+
+
+
   <ion-grid>
+
+    <!--Contraseña olvidada-->
+    <ion-row id="centrar">
+      <p (click)="contrasennaOlvidada()">¿Has olvidado tu contraseña?</p>
+    </ion-row>
+
+
+    <!--Opción anónima-->
     <ion-row id="centrar">
       <p (click)="loginCorrecto()">Iniciar como anónimo</p>
     </ion-row>

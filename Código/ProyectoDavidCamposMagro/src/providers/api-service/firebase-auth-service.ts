@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 
 @Injectable()
 export class FirebaseAuthService {
+
   constructor(public angularFireAuth: AngularFireAuth) {
       
   }//end constructor
@@ -12,7 +13,6 @@ export class FirebaseAuthService {
   }//end registerUser
 
   loginUser(email: string, password: string): Promise<any> {
-      
     return this.angularFireAuth.signInWithEmailAndPassword(email, password);
   }//end loginUser
 
@@ -31,5 +31,13 @@ export class FirebaseAuthService {
       }
     });
   }//end logoutUser
+
+  enviarContrasenna(email:string){
+    try {
+      return this.angularFireAuth.sendPasswordResetEmail(email);
+    } catch (error) {
+      console.log('Error->', error);
+    }
+  }
 
 } //end_class
