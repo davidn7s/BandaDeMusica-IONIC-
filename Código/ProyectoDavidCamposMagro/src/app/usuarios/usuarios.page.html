@@ -9,33 +9,22 @@
 </ion-header>
 
 <!--Barra de búsqueda-->
-<ion-searchbar
-  debounce="100"
-  placeholder="Buscar usuario"
-  (ionChange)="buscar($event)"
-></ion-searchbar>
+<ion-searchbar debounce="100" placeholder="Buscar usuario" (ionChange)="buscar($event)"></ion-searchbar>
 
 <!--Select de tipo-->
 <ion-item>
   <ion-label position="floating" color="tertiary">Tipo</ion-label>
-  <ion-select
-    [(ngModel)]="tipo"
-    (ionChange)="cambioTipo($event)"
-    interface="popover"
-    cancelText="Cancelar"
-    okText="Aceptar"
-  >
+  <ion-select [(ngModel)]="tipo" (ionChange)="cambioTipo($event)" interface="popover" cancelText="Cancelar"
+    okText="Aceptar">
     <ion-select-option value="todo">Todo</ion-select-option>
-    <ion-select-option value="perteneciente"
-      >Pertenece a la banda</ion-select-option
-    >
-    <ion-select-option value="noPerteneciente"
-      >No pertenece a la banda</ion-select-option
-    >
+    <ion-select-option value="perteneciente">Pertenece a la banda</ion-select-option>
+    <ion-select-option value="noPerteneciente">No pertenece a la banda</ion-select-option>
   </ion-select>
 </ion-item>
 <ion-content>
-  <ion-list *ngFor="let usuario of usuariosMuestra | filtro: textoBuscar: 'nombre'">
+
+  <!--Busca por nombre o por apellidos-->
+  <ion-list *ngFor="let usuario of usuariosMuestra | filtro: textoBuscar: 'nombre' :'apellidos'">
     <ion-card>
       <ion-card-content>
         <ion-grid>

@@ -16,22 +16,13 @@
   </ion-toolbar>
 
   <!--Barra de búsqueda-->
-  <ion-searchbar
-    debounce="100"
-    placeholder="Buscar en el repertorio"
-    (ionChange)="buscar($event)"
-  ></ion-searchbar>
+  <ion-searchbar debounce="100" placeholder="Buscar en el repertorio" (ionChange)="buscar($event)"></ion-searchbar>
 
   <!--Select de tipo-->
   <ion-item>
     <ion-label position="floating" color="tertiary">Tipo</ion-label>
-    <ion-select
-      [(ngModel)]="tipo"
-      (ionChange)="cambioTipo($event)"
-      interface="popover"
-      cancelText="Cancelar"
-      okText="Aceptar"
-    >
+    <ion-select [(ngModel)]="tipo" (ionChange)="cambioTipo($event)" interface="popover" cancelText="Cancelar"
+      okText="Aceptar">
       <ion-select-option value="todo">Todo</ion-select-option>
       <ion-select-option value="bso">BSO</ion-select-option>
       <ion-select-option value="marcha">Marchas</ion-select-option>
@@ -44,9 +35,7 @@
 
 <ion-content *ngIf="gestor">
   <!--Vista administrador-->
-  <ion-list
-    *ngFor="let partitura of repertorioMuestra | filtro: textoBuscar: 'titulo'"
-  >
+  <ion-list *ngFor="let partitura of repertorioMuestra | filtro: textoBuscar: 'titulo' : 'autor'">
     <ion-card>
       <ion-card-content>
         <ion-grid>
@@ -68,13 +57,8 @@
             </ion-col>
             <!--Modificar partitura-->
             <ion-col size="1">
-              <button
-                ion-button
-                icon-only
-                (click)="modificarPartitura(partitura)"
-              >
-                <ion-icon name="pencil-outline"></ion-icon></button
-            ></ion-col>
+              <button ion-button icon-only (click)="modificarPartitura(partitura)">
+                <ion-icon name="pencil-outline"></ion-icon></button></ion-col>
             <!--Borrar partitura-->
             <ion-col size="1">
               <button ion-button icon-only (click)="confirmar(partitura)">
@@ -90,9 +74,7 @@
 
 <!--Vista normal-->
 <ion-content *ngIf="!gestor">
-  <ion-list
-    *ngFor="let partitura of repertorioMuestra | filtro: textoBuscar: 'titulo'"
-  >
+  <ion-list *ngFor="let partitura of repertorioMuestra | filtro: textoBuscar: 'titulo'">
     <ion-card>
       <ion-card-content>
         <ion-grid>
@@ -109,12 +91,7 @@
 
             <!--Enlace partitura-->
             <ion-col size="1">
-              <button
-                ion-button
-                icon-only
-                (click)="enlace(partitura,2)"
-                *ngIf="globalUsu.musico!=undefined"
-              >
+              <button ion-button icon-only (click)="enlace(partitura,2)" *ngIf="globalUsu.musico!=undefined">
                 <ion-icon name="download-outline"></ion-icon>
               </button>
             </ion-col>
