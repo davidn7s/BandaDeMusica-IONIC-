@@ -50,22 +50,20 @@ export class EventosPage implements OnInit {
   ngOnInit() {
     this.appComponent.getGlobalUsu();
     this.globalUsu = this.globalVar.usuGlobal;
-    if (
-      this.globalUsu.musico != undefined &&
-      this.globalUsu.musico.gestor == true
-    )
+    if (this.globalUsu.musico != undefined && this.globalUsu.musico.gestor == true){
       this.gestor = true;
+    }
+      
     this.getEventos();
   } //end ngOnInit
 
   ionViewWillEnter() {
     this.appComponent.getGlobalUsu();
     this.globalUsu = this.globalVar.usuGlobal;
-    if (
-      this.globalUsu.musico != undefined &&
-      this.globalUsu.musico.gestor == true
-    )
+    if (this.globalUsu.musico != undefined && this.globalUsu.musico.gestor == true){
       this.gestor = true;
+    }
+      
   } //end ionViewWillEnter
 
   //============================================================================================================

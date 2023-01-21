@@ -24,7 +24,7 @@ export class FireServiceProvider {
 
 
 
-     //=============
+    //=============
     //| Ficheros  |
     //=============
 
@@ -107,13 +107,13 @@ export class FireServiceProvider {
 
     }//end_uploadImage
 
-//======================================================================================
+    //======================================================================================
 
     //====================
     //| Objetos firebase |
     //====================
 
-//======================================================================================
+    //======================================================================================
 
     //==============
     //| Getters By |
@@ -142,8 +142,26 @@ export class FireServiceProvider {
     }//end get usuarios
 
 
+    getUsuarioById(id):Promise<Usuario>{
+        let promise = new Promise<Usuario>((resolve, reject) => {
+            const usuariosRef = this.angularFirestore.collection('Usuarios').doc(id).ref;
+            usuariosRef.get().then((data: any) => {
+                    let usuario = new Usuario
+                        let usuarioJson = data.data();
+                        usuario = Usuario.createFromJsonObject(usuarioJson);
+                    
+                    resolve(usuario);
+                })
+                .catch((error: Error) => {
+                    reject(error.message);
+                });
+        });
+        return promise;
+    }
 
-//======================================================================================
+
+
+    //======================================================================================
 
     //==============
     //| Getters TR |
@@ -162,28 +180,28 @@ export class FireServiceProvider {
     }
 
 
-//======================================================================================
+    //======================================================================================
 
     //===========
     //| Deletes |
     //===========
 
-    eliminarUsuario(usuario: Usuario, valor:boolean): Promise<Boolean> {
+    eliminarUsuario(usuario: Usuario, valor: boolean): Promise<Boolean> {
         let promise = new Promise<Boolean>((resolve, reject) => {
             this.angularFirestore.collection('Usuarios').doc(usuario.id).delete().then(
-                (data: any) => { 
-                    if(valor){
-                    this.presentToast(usuario.nombre+ ' '+ usuario.apellidos +' ha sido eliminado')
-                
+                (data: any) => {
+                    if (valor) {
+                        this.presentToast(usuario.nombre + ' ' + usuario.apellidos + ' ha sido eliminado')
 
-                    //Email para eliminar de la autenticación de Firebase
-                    let usu={
-                        emailBorrar: usuario.email,
-                        fechaBorrado: new Date()
+
+                        //Email para eliminar de la autenticación de Firebase
+                        let usu = {
+                            emailBorrar: usuario.email,
+                            fechaBorrado: new Date()
+                        }
+                        this.angularFirestore.collection('UsuariosBorrados').add(usu)
+
                     }
-                   this.angularFirestore.collection('UsuariosBorrados').add(usu)
-
-                }
                     resolve(true);
                 }
             )
@@ -198,9 +216,9 @@ export class FireServiceProvider {
     eliminarNoticia(noticia: Noticia): Promise<Boolean> {
         let promise = new Promise<Boolean>((resolve, reject) => {
             this.angularFirestore.collection('Noticias').doc(noticia.id).delete().then(
-                (data: any) => { 
+                (data: any) => {
                     this.removeFile(noticia.imagen);
-                    this.presentToast('La noticia: '+noticia.titulo+' ha sido eliminada')
+                    this.presentToast('La noticia: ' + noticia.titulo + ' ha sido eliminada')
                     resolve(true);
                 }
             )
@@ -214,9 +232,9 @@ export class FireServiceProvider {
     eliminarPartitura(partitura: Partitura): Promise<Boolean> {
         let promise = new Promise<Boolean>((resolve, reject) => {
             this.angularFirestore.collection('Repertorio').doc(partitura.id).delete().then(
-                (data: any) => { 
+                (data: any) => {
                     this.removeFile(partitura.fichero);
-                    this.presentToast(partitura.titulo+ ' - '+ partitura.autor+' ha sido eliminada')
+                    this.presentToast(partitura.titulo + ' - ' + partitura.autor + ' ha sido eliminada')
                     resolve(true);
                 }
             )
@@ -231,8 +249,8 @@ export class FireServiceProvider {
     eliminarEvento(evento): Promise<Boolean> {
         let promise = new Promise<Boolean>((resolve, reject) => {
             this.angularFirestore.collection('Eventos').doc(evento.id).delete().then(
-                (data: any) => { 
-                    this.presentToast('El evento: '+evento.title+' ha sido eliminado')
+                (data: any) => {
+                    this.presentToast('El evento: ' + evento.title + ' ha sido eliminado')
                     resolve(true);
                 }
             )
@@ -244,7 +262,7 @@ export class FireServiceProvider {
     }//end_eliminar_evento
 
 
-//======================================================================================
+    //======================================================================================
 
     //===========
     //| Updates |
@@ -254,7 +272,7 @@ export class FireServiceProvider {
         let promise = new Promise<Usuario>((resolve, reject) => {
             this.angularFirestore.collection("Usuarios").doc(nuevosDatosUsuario.id).update(JSON.parse(JSON.stringify(nuevosDatosUsuario)))
                 .then(() => {
-                    this.presentToast(nuevosDatosUsuario.nombre+ ' '+ nuevosDatosUsuario.apellidos +' ha sido modificad@')
+                    this.presentToast(nuevosDatosUsuario.nombre + ' ' + nuevosDatosUsuario.apellidos + ' ha sido modificad@')
                     resolve(nuevosDatosUsuario);
                 })
                 .catch((error: Error) => {
@@ -268,7 +286,7 @@ export class FireServiceProvider {
         let promise = new Promise<Noticia>((resolve, reject) => {
             this.angularFirestore.collection("Noticias").doc(nuevosDatosNoticia.id).update(JSON.parse(JSON.stringify(nuevosDatosNoticia)))
                 .then(() => {
-                    this.presentToast('La noticia: '+nuevosDatosNoticia.titulo +' ha sido modificada')
+                    this.presentToast('La noticia: ' + nuevosDatosNoticia.titulo + ' ha sido modificada')
                     resolve(nuevosDatosNoticia);
                 })
                 .catch((error: Error) => {
@@ -282,7 +300,7 @@ export class FireServiceProvider {
         let promise = new Promise<Partitura>((resolve, reject) => {
             this.angularFirestore.collection("Repertorio").doc(nuevosDatosPartitura.id).update(JSON.parse(JSON.stringify(nuevosDatosPartitura)))
                 .then(() => {
-                    this.presentToast('La partitura: '+nuevosDatosPartitura.titulo+ ' - '+ nuevosDatosPartitura.autor+' ha sido modificada')
+                    this.presentToast('La partitura: ' + nuevosDatosPartitura.titulo + ' - ' + nuevosDatosPartitura.autor + ' ha sido modificada')
                     resolve(nuevosDatosPartitura);
                 })
                 .catch((error: Error) => {
@@ -292,21 +310,21 @@ export class FireServiceProvider {
         return promise;
     }//end_modificar_partitura
 
-   
 
-//======================================================================================
+
+    //======================================================================================
 
     //===========
     //| Inserts |
     //===========
 
-    insertarUsuario(datosNuevoUsuario: Usuario, opcion:boolean): Promise<Usuario> {
+    insertarUsuario(datosNuevoUsuario: Usuario, opcion: boolean): Promise<Usuario> {
         let promise = new Promise<Usuario>((resolve, reject) => {
             datosNuevoUsuario.id = this.angularFirestore.collection("Usuarios").ref.doc().id;
             this.angularFirestore.collection("Usuarios").doc(datosNuevoUsuario.id).set(JSON.parse(JSON.stringify(datosNuevoUsuario)))
                 .then(() => {
-                    if(opcion)
-                        this.presentToast(datosNuevoUsuario.nombre+ ' '+ datosNuevoUsuario.apellidos +' ha sido modificad@')
+                    if (opcion)
+                        this.presentToast(datosNuevoUsuario.nombre + ' ' + datosNuevoUsuario.apellidos + ' ha sido modificad@')
                     resolve(datosNuevoUsuario);
                 })
                 .catch((error: Error) => {
@@ -322,7 +340,7 @@ export class FireServiceProvider {
             datosNuevoNoticia.id = this.angularFirestore.collection("Noticias").ref.doc().id;
             this.angularFirestore.collection("Noticias").doc(datosNuevoNoticia.id).set(JSON.parse(JSON.stringify(datosNuevoNoticia)))
                 .then(() => {
-                    this.presentToast('La noticia: '+datosNuevoNoticia.titulo +' ha sido añadida')
+                    this.presentToast('La noticia: ' + datosNuevoNoticia.titulo + ' ha sido añadida')
                     resolve(datosNuevoNoticia);
                 })
                 .catch((error: Error) => {
@@ -337,7 +355,7 @@ export class FireServiceProvider {
             datosNuevoPartitura.id = this.angularFirestore.collection("Repertorio").ref.doc().id;
             this.angularFirestore.collection("Repertorio").doc(datosNuevoPartitura.id).set(JSON.parse(JSON.stringify(datosNuevoPartitura)))
                 .then(() => {
-                    this.presentToast('La partitura: '+datosNuevoPartitura.titulo+ ' - '+ datosNuevoPartitura.autor+' ha sido añadida')
+                    this.presentToast('La partitura: ' + datosNuevoPartitura.titulo + ' - ' + datosNuevoPartitura.autor + ' ha sido añadida')
                     resolve(datosNuevoPartitura);
                 })
                 .catch((error: Error) => {
@@ -346,7 +364,7 @@ export class FireServiceProvider {
         });
         return promise;
     }//end_insertarPartitura
-    
+
 
 
 }//end_class

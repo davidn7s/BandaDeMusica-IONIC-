@@ -33,7 +33,7 @@ export class ModificarUsuarioPage implements OnInit {
     private globalVariable: GlobalVariablesService,
     private appComponent: AppComponent,
     private menu: MenuController
-  ) {} //end constructor
+  ) { } //end constructor
 
   //======================================================================================================================================
 
@@ -45,28 +45,25 @@ export class ModificarUsuarioPage implements OnInit {
     localStorage.clear();
     this.appComponent.getGlobalUsu();
     this.globalUsu = this.globalVariable.usuGlobal;
-    if (
-      this.globalUsu.musico != undefined &&
-      this.globalUsu.musico.gestor == true
-    )
-      this.gestor = true;
 
-    this.usuario = Usuario.createFromJsonObject(JSON.parse(this.usuarioJson));
+    if (this.globalUsu.musico != undefined && this.globalUsu.musico.gestor == true) {
+      this.gestor = true;
+    }
+
+    this.usuario = new Usuario();
+
     this.propioC = JSON.parse(this.propio);
-    if (
-      this.usuario.musico.categoria != '' &&
-      this.usuario.musico.categoria != null
-    )
-      this.musico = true;
+
+    this.getUsuario()
   } //end ngOnInit
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.menu.enable(false);
-  } //end ionViewWillEnter
+  } //end ionViewDidEnter
 
-  ionViewWillLeave() {
+  ionViewDidLeave() {
     this.menu.enable(true);
-  } //end ionViewWillLeave
+  } //end ionViewDidLeave
 
   //======================================================================================================================================
 
@@ -78,25 +75,40 @@ export class ModificarUsuarioPage implements OnInit {
     if (!this.musico) {
       this.usuario.musico = undefined;
       this.firebaseService
-        .eliminarUsuario(this.usuario,false)
+        .eliminarUsuario(this.usuario, false)
         .then(() => {
           this.firebaseService
             .insertarUsuario(this.usuario, true)
-            .then(() => {})
-            .catch((error: string) => {});
+            .then(() => { })
+            .catch((error: string) => { });
         })
-        .catch((error: string) => {});
+        .catch((error: string) => { });
     } else {
       this.firebaseService
         .modificarUsuario(this.usuario)
-        .then(() => {})
-        .catch((error: string) => {});
+        .then(() => { })
+        .catch((error: string) => { });
     }
 
-    if (this.propioC) this.globalVariable.usuGlobal = this.usuario;
+    if (this.propioC) {
+      this.globalVariable.usuGlobal = this.usuario;
+    }
 
     this.closeModal();
   } //end modificar
+
+
+  getUsuario() {
+    this.firebaseService.getUsuarioById(Usuario.createFromJsonObject(JSON.parse(this.usuarioJson)).id)
+      .then((data) => {
+        this.usuario = data
+        if (this.usuario.musico.categoria != '' && this.usuario.musico.categoria != null) {
+          this.musico = true;
+        }
+      }).catch((error: string) => {
+
+      })
+  }
 
   //======================================================================================================================================
 
@@ -115,24 +127,37 @@ export class ModificarUsuarioPage implements OnInit {
   //===============
 
   deshabilitado() {
-    if (this.usuario.nombre == null) return true;
-    if (this.usuario.nombre == '') return true;
-    if (this.usuario.nombre.length < 3) return true;
-    if (this.usuario.apellidos == null) return true;
-    if (this.usuario.apellidos == '') return true;
-    if (this.usuario.apellidos.length < 3) return true;
-    if (this.musico) {
-      if (this.usuario.musico.categoria == null) return true;
-      if (this.usuario.musico.categoria == '') return true;
-      if (this.usuario.musico.instrumento == null) return true;
-      if (this.usuario.musico.instrumento == '') return true;
-    }
+    if (this.usuario.nombre == null)
+      return true;
+    if (this.usuario.nombre == '')
+      return true;
+    if (this.usuario.nombre.length < 3)
+      return true;
+    if (this.usuario.apellidos == null)
+      return true;
+    if (this.usuario.apellidos == '')
+      return true;
+    if (this.usuario.apellidos.length < 3)
+      return true;
 
+    if (this.usuario.musico != undefined) {
+      if (this.usuario.musico.categoria == undefined)
+        return true;
+      if (this.usuario.musico.categoria == '')
+        return true;
+      if (this.usuario.musico.instrumento == undefined)
+        return true;
+      if (this.usuario.musico.instrumento == '')
+        return true;
+    }
     return false;
   } // end deshabilitado
 
-  cambio(e) {
-    if (this.musico) this.usuario.musico = new Musico();
-    else this.usuario.musico = undefined;
+  cambio() {
+    if (this.usuario.musico == undefined && this.musico) {
+      this.usuario.musico = new Musico();
+    } else if (!this.musico) {
+      this.usuario.musico = undefined;
+    }
   } //end cambio
 }//end class

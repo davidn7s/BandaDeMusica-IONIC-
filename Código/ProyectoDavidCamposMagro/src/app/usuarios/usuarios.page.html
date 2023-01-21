@@ -35,10 +35,7 @@
   </ion-select>
 </ion-item>
 <ion-content>
-  <h4 class="detalleh4">Lista de Usuarios</h4>
-  <ion-list
-    *ngFor="let usuario of usuariosMuestra | filtro: textoBuscar: 'nombre'"
-  >
+  <ion-list *ngFor="let usuario of usuariosMuestra | filtro: textoBuscar: 'nombre'">
     <ion-card>
       <ion-card-content>
         <ion-grid>

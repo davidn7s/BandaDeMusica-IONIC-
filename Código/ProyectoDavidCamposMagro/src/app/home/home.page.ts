@@ -50,13 +50,13 @@ export class HomePage {
   //=============
   ngOnInit() {}//end ngOnInit
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.menu.enable(false); 
-  }//end ionViewWillEnter
+  }//end ionViewDidEnter
 
-  ionViewWillLeave() {
+  ionViewDidLeave() {
     this.menu.enable(true);
-  }//end ionViewWillLeave
+  }//end ionViewDidLeave
 
   //======================================================================================================================================
   
@@ -129,6 +129,10 @@ export class HomePage {
 
   deshabilitado() {
     if (!/^[a-zA-Z0-9_.+-]+[@]{1}[a-zA-Z0-9-]+[.]{1}[a-zA-Z]+$/.test(this.correo))
+      return true;
+    if(this.contrasenna=="")
+      return true;
+    if(this.contrasenna==null)
       return true;
     if (this.contrasenna.length < 6) 
       return true;

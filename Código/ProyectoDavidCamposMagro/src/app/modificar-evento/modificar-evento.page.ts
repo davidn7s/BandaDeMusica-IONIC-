@@ -58,13 +58,13 @@ export class ModificarEventoPage implements OnInit {
     this.transformar(this.evento.endTime, false);
   } //end ngOnInit
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     this.menu.enable(false);
-  } //end ionViewWillEnter
+  } //end ionViewDidEnter
 
-  ionViewWillLeave() {
+  ionViewDidLeave() {
     this.menu.enable(true);
-  } //end ionViewWillLeave
+  } //end ionViewDidLeave
 
   //======================================================================================================================================
 
