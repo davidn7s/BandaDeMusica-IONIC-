@@ -19,7 +19,7 @@
 ></ion-searchbar>
 
 <ion-content>
-  <ion-list *ngFor="let evento of eventos | filtro: textoBuscar: 'title' ">
+  <ion-list *ngFor="let evento of eventos | filtro: textoBuscar: 'title' : 'title' ">
     <ion-card>
       <ion-card-header>
         <ion-row>

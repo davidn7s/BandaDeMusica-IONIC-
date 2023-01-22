@@ -39,7 +39,7 @@ export class ListadoEventosPage implements OnInit {
     private menu: MenuController,
     private globalVar: GlobalVariablesService,
     private appComponent: AppComponent
-  ) {} //end constructor
+  ) { } //end constructor
 
   //======================================================================================================================================
 
@@ -89,11 +89,7 @@ export class ListadoEventosPage implements OnInit {
           this.eventos.push(event);
 
           //Ordenar eventos de más nuevas a más antiguas
-          this.eventos.sort((a, b) =>
-            new Date(a.startTime).getTime < new Date(b.startTime).getTime
-              ? -1
-              : 1
-          );
+          this.eventos.sort((a, b) =>   a.startTime <= b.startTime ? 1:-1);
         });
       });
   } //end getEventos
@@ -101,8 +97,8 @@ export class ListadoEventosPage implements OnInit {
   borrarEvento(evento) {
     this.fireService
       .eliminarEvento(evento)
-      .then(() => {})
-      .catch((error: string) => {});
+      .then(() => { })
+      .catch((error: string) => { });
   } //end borrarEvento
 
   //======================================================================================================================================
@@ -125,7 +121,7 @@ export class ListadoEventosPage implements OnInit {
           },
           {
             text: 'Cancelar',
-            handler: () => {},
+            handler: () => { },
           },
         ],
       })
