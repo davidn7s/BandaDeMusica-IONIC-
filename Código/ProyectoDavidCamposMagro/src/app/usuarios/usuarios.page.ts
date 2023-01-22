@@ -92,6 +92,7 @@ export class UsuariosPage implements OnInit {
   opciones(usuario: Usuario) {
     this.alertCtrl
       .create({
+        cssClass: 'app-alert',
         message: 'Opciones',
         buttons: [
           {
@@ -120,6 +121,7 @@ export class UsuariosPage implements OnInit {
   confirmar(usuario: Usuario) {
     this.alertCtrl
       .create({
+        cssClass: 'app-alert',
         message: '¿Estas seguro de borrar la usuario?',
         buttons: [
           {

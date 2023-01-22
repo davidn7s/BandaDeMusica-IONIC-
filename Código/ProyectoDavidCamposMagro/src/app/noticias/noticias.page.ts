@@ -97,6 +97,7 @@ export class NoticiasPage implements OnInit {
   confirmar(noticia: Noticia) {
     this.alertCtrl
       .create({
+        cssClass: 'app-alert',
         message: '¿Estas seguro de borrar la noticia?',
         buttons: [
           {

@@ -51,9 +51,18 @@ input, textarea {
 
 .monthview-current{
     background: #979494 !important;
-
-    
 }
+
+.app-alert .alert-wrapper{
+    .alert-button-inner{
+      color:#008c2b;
+    }
+  }
+
+  ion-checkbox {
+    --background-checked: #008c2b;
+    border-color: #008c2b;
+  }
 
 
 

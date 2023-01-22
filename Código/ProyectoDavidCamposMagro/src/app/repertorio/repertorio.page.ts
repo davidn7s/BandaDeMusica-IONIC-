@@ -110,6 +110,7 @@ export class RepertorioPage implements OnInit {
   confirmar(partitura: Partitura) {
     this.alertCtrl
       .create({
+        cssClass: 'app-alert',
         message: '¿Estas seguro de borrar la partitura?',
         buttons: [
           {
