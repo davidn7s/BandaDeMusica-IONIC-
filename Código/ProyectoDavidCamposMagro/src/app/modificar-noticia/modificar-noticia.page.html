@@ -2,34 +2,21 @@
   <ion-toolbar>
     <!--Botón cerrar modal-->
     <ion-buttons slot="start">
-      <ion-button ion-button (click)="closeModal()"
-        ><ion-icon name="arrow-back-outline"></ion-icon
-      ></ion-button>
+      <ion-button ion-button (click)="closeModal()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
 
     <!--Opciones de titulos-->
     <ion-title *ngIf="noticiaNueva.titulo==''">Nueva Noticia</ion-title>
-    <ion-title *ngIf="noticiaNueva.titulo!=''"
-      >{{noticiaNueva.titulo}}</ion-title
-    >
+    <ion-title *ngIf="noticiaNueva.titulo!=''">{{noticiaNueva.titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="form-content">
-  <form
-    [formGroup]="validations_form"
-    (ngSubmit)="onSubmit(validations_form.value)"
-  >
+  <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
     <ion-card>
       <ion-card-header>
         <ion-card-title>
-          <input
-            type="text"
-            placeholder="Titulo"
-            maxlength="25"
-            size="10"
-            formControlName="titulo"
-          />
+          <input type="text" placeholder="Titulo" maxlength="25" size="10" formControlName="titulo" />
         </ion-card-title>
       </ion-card-header>
 
@@ -38,43 +25,26 @@
           <ion-row>
             <!--Imagen-->
             <ion-col size="12">
-              <ion-img
-                *ngIf="noticiaNueva.imagen!=''"
-                src="{{noticiaNueva.imagen}}"
-              ></ion-img>
-              <ion-img
-                *ngIf="noticiaNueva.imagen==''"
-                src="..\..\assets\icon\logo.png"
-              ></ion-img>
+              <ion-img *ngIf="noticiaNueva.imagen!=''" src="{{noticiaNueva.imagen}}"></ion-img>
+              <ion-img *ngIf="noticiaNueva.imagen==''" src="..\..\assets\icon\logo.png"></ion-img>
             </ion-col>
           </ion-row>
           <ion-row>
             <ion-col size="12">
-              <ion-textarea
-                type="text"
-                placeholder="Contenido"
-                size="10"
-                formControlName="contenido"
-              ></ion-textarea>
+              <ion-textarea type="text" placeholder="Contenido" size="10" formControlName="contenido"></ion-textarea>
             </ion-col>
           </ion-row>
         </ion-grid>
         <!--Subir imagen-->
         <ion-input type="text" formControlName="imagen" hidden></ion-input>
-        <ion-button color="tertiary" shape="round" size="medium">
+        <ion-button id="bimagen" color="tertiary" shape="round" size="small">
           <input type="file" (change)="imageOnChange($event)" />
         </ion-button>
       </ion-card-content>
     </ion-card>
 
     <!-- Boton de submit-->
-    <ion-button
-      color="tertiary"
-      class="submit-btn"
-      expand="block"
-      type="submit"
-      [disabled]="!validations_form.valid"
-      >Listo</ion-button
-    >
+    <ion-button color="tertiary" class="submit-btn" expand="block" type="submit"
+      [disabled]="!validations_form.valid">Listo</ion-button>
   </form>
 </ion-content>

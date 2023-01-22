@@ -95,7 +95,7 @@ export class EventosPage implements OnInit {
   //====================
 
   tituloCambiado(titulo) {
-    this.titulo = titulo;
+    this.titulo = titulo.charAt(0).toUpperCase() + titulo.slice(1);
   } //end tituloCambiado
 
   //============================================================================================================

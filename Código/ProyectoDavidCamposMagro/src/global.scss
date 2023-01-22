@@ -65,4 +65,23 @@ input, textarea {
   }
 
 
+  ion-alert {
+    // checkbox or radio button color
+    .alert-radio-inner.sc-ion-alert-md {
+      background-color: #008c2b !important;
+      border-color: #008c2b;
+    }
+  
+    // Button color
+    .alert-button-inner.sc-ion-alert-md {
+      color: #008c2b;
+    }
+
+      // checkbox border color
+  [aria-checked="true"].sc-ion-alert-md .alert-radio-icon.sc-ion-alert-md {
+    border-color: #008c2b;
+  }
+  }
+
+
 
