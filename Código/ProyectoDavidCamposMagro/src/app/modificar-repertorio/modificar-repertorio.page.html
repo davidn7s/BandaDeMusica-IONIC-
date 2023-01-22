@@ -2,22 +2,16 @@
   <ion-toolbar>
     <!--Botón cerrar modal-->
     <ion-buttons slot="start">
-      <ion-button ion-button (click)="closeModal()"
-        ><ion-icon name="arrow-back-outline"></ion-icon
-      ></ion-button>
+      <ion-button ion-button (click)="closeModal()"><ion-icon name="arrow-back-outline"></ion-icon></ion-button>
     </ion-buttons>
     <!--Opciones de titulos-->
     <ion-title *ngIf="partituraNueva.titulo==''">Nueva Partitura</ion-title>
-    <ion-title *ngIf="partituraNueva.titulo!=''"
-      >{{partituraNueva.titulo}}</ion-title>
+    <ion-title *ngIf="partituraNueva.titulo!=''">{{partituraNueva.titulo}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="form-content">
-  <form
-    [formGroup]="validations_form"
-    (ngSubmit)="onSubmit(validations_form.value)"
-  >
+  <form [formGroup]="validations_form" (ngSubmit)="onSubmit(validations_form.value)">
     <ion-item>
       <ion-label position="stacked" color="tertiary">Titulo</ion-label>
       <input type="text" placeholder="Titulo" formControlName="titulo" />
@@ -46,19 +40,15 @@
     </ion-item>
     <!--Subir pdf-->
     <ion-input type="text" formControlName="pdf" hidden></ion-input>
-    <ion-button color="tertiary" shape="round" size="medium">
-      <input type="file" (change)="fileOnChange($event)" />
-    </ion-button>
+    <div id="centrar">
+      <ion-button id="bpdf" color="tertiary" shape="round" size="smnall">
+        <input type="file" (change)="fileOnChange($event)" />
+      </ion-button>
+    </div>
+
 
     <!-- Boton de submit-->
-    <ion-button
-      color="tertiary"
-      class="submit-btn"
-      expand="block"
-      type="submit"
-      [disabled]="!validations_form.valid"
-    >
-      Listo</ion-button
-    >
+    <ion-button color="tertiary" class="submit-btn" expand="block" type="submit" [disabled]="!validations_form.valid">
+      Listo</ion-button>
   </form>
 </ion-content>
