@@ -94,6 +94,7 @@ export class RecordarContrasennaPage implements OnInit {
       message: 'Enviando correo ...',
       duration: 10000,
       spinner: 'bubbles',
+      cssClass:'loader-css-class',
       translucent: true,
     });
     await loading.present();

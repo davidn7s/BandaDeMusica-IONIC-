@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   AlertController,
   ModalController,
@@ -35,7 +36,8 @@ export class UsuariosPage implements OnInit {
     private alertCtrl: AlertController,
     private toastCtrl: ToastController,
     private globalVar: GlobalVariablesService,
-    private appComponent: AppComponent
+    private appComponent: AppComponent,
+    public router: Router
   ) {} //end constructor
 
   //======================================================================================================================================
@@ -47,7 +49,6 @@ export class UsuariosPage implements OnInit {
   ngOnInit() {
     this.appComponent.getGlobalUsu();
     this.globalUsu = this.globalVar.usuGlobal;
-
     this.getUsuarios();
   } //end ngOnInit
 
@@ -98,11 +99,10 @@ export class UsuariosPage implements OnInit {
           {
             text: 'Borrar',
             handler: () => {
-              if (usuario.id != this.globalUsu.id) this.confirmar(usuario);
+              if (usuario.id != this.globalUsu.id) 
+                this.confirmar(usuario);
               else
-                this.presentToast(
-                  'Estas autenticado con este mismo usuario, no puede ser borrado'
-                );
+                this.presentToast('Estas autenticado con este mismo usuario, no puede ser borrado');
             },
           },
           {
@@ -162,38 +162,46 @@ export class UsuariosPage implements OnInit {
   //==================
 
   async ventanaModal(usuario: Usuario) {
-    const modal = await this.modalController.create({
-      component: ModificarUsuarioPage,
-      componentProps: {
-        usuarioJson: JSON.stringify(usuario),
-        propio: JSON.stringify(false),
-      },
-    });
 
-    let mensaje = '';
-    mensaje +=
-      '<strong>Usuario:</strong> ' +
-      usuario.nombre.charAt(0).toUpperCase() +
-      usuario.nombre.slice(1) +
-      ' ' +
-      usuario.apellidos.charAt(0).toUpperCase() +
-      usuario.apellidos.slice(1);
-    if (usuario.musico)
+    if(this.globalUsu.id!=usuario.id){
+      const modal = await this.modalController.create({
+        component: ModificarUsuarioPage,
+        componentProps: {
+          usuarioJson: JSON.stringify(usuario),
+          propio: JSON.stringify(false),
+        },
+      });
+      let mensaje = '';
       mensaje +=
-        '\n <strong>Categoría:</strong> ' +
-        usuario.musico.categoria.charAt(0).toUpperCase() +
-        usuario.musico.categoria.slice(1) +
-        ' <strong>Instrumento:</strong> ' +
-        usuario.musico.instrumento.charAt(0).toUpperCase() +
-        usuario.musico.instrumento.slice(1);
+        '<strong>Usuario:</strong> ' +
+        usuario.nombre.charAt(0).toUpperCase() +
+        usuario.nombre.slice(1) +
+        ' ' +
+        usuario.apellidos.charAt(0).toUpperCase() +
+        usuario.apellidos.slice(1);
+      if (usuario.musico)
+        mensaje +=
+          '\n <strong>Categoría:</strong> ' +
+          usuario.musico.categoria.charAt(0).toUpperCase() +
+          usuario.musico.categoria.slice(1) +
+          ' <strong>Instrumento:</strong> ' +
+          usuario.musico.instrumento.charAt(0).toUpperCase() +
+          usuario.musico.instrumento.slice(1);
+  
+      this.presentToast(mensaje);
+  
+      modal.onDidDismiss().then(() => {
+        this.getUsuarios();
+        this.textoBuscar = '';
+      });
+      return await modal.present();
+    }else{
+      console.log('A')
+      this.router.navigateByUrl('modificar-personal')
+    }
+    
 
-    this.presentToast(mensaje);
-
-    modal.onDidDismiss().then(() => {
-      this.getUsuarios();
-      this.textoBuscar = '';
-    });
-    return await modal.present();
+   
   } //end ventanaModal
 
   //======================================================================================================================================

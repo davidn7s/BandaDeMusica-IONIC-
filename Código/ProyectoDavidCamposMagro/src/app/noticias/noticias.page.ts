@@ -29,7 +29,7 @@ export class NoticiasPage implements OnInit {
     private globalVar: GlobalVariablesService,
     private appComponent: AppComponent,
     private datePipe: DatePipe
-  ) {} //end constructor
+  ) { } //end constructor
 
   //======================================================================================================================================
 
@@ -40,10 +40,7 @@ export class NoticiasPage implements OnInit {
   ngOnInit() {
     this.appComponent.getGlobalUsu();
     this.globalUsu = this.globalVar.usuGlobal;
-    if (
-      this.globalUsu.musico != undefined &&
-      this.globalUsu.musico.gestor == true
-    )
+    if (this.globalUsu.musico != undefined && this.globalUsu.musico.gestor == true)
       this.gestor = true;
     this.getNoticias();
   } //end ngOnInit
@@ -51,10 +48,8 @@ export class NoticiasPage implements OnInit {
   ionViewWillEnter() {
     this.appComponent.getGlobalUsu();
     this.globalUsu = this.globalVar.usuGlobal;
-    if (
-      this.globalUsu.musico != undefined &&
-      this.globalUsu.musico.gestor == true
-    )
+    console.log('Noticia',this.globalUsu)
+    if (this.globalUsu.musico != undefined && this.globalUsu.musico.gestor == true)
       this.gestor = true;
   } //end ionViewWillEnter
 
@@ -84,8 +79,8 @@ export class NoticiasPage implements OnInit {
   borrarNoticia(noticia: Noticia) {
     this.fireService
       .eliminarNoticia(noticia)
-      .then(() => {})
-      .catch((error: string) => {});
+      .then(() => { })
+      .catch((error: string) => { });
   } //end borrarNoticia
 
   //======================================================================================================================================
@@ -108,7 +103,7 @@ export class NoticiasPage implements OnInit {
           },
           {
             text: 'Cancelar',
-            handler: () => {},
+            handler: () => { },
           },
         ],
       })

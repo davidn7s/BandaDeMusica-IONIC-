@@ -4,7 +4,7 @@ import { ModalController, Platform } from '@ionic/angular';
 import { Usuario } from 'src/modelo/Usuario';
 import { GlobalVariablesService } from 'src/services/global-variables.service';
 
-import { ModificarUsuarioPage } from './modificar-usuario/modificar-usuario.page';
+import { ModificarPersonalPage } from './modificar-personal/modificar-personal.page';
 
 @Component({
   selector: 'app-root',
@@ -22,9 +22,7 @@ export class AppComponent implements OnInit {
   private usuarioGlobal: Usuario = new Usuario();
 
   constructor(
-    private platform: Platform,
     private globalVar: GlobalVariablesService,
-    private modalCtrl: ModalController,
     public router: Router) {
     this.sideMenu();
   } //end constructor
@@ -42,19 +40,12 @@ export class AppComponent implements OnInit {
 
   //======================================================================================================================================
 
-  //==================
-  //|Ventanas modales|
-  //==================
+  //============
+  //|Navegación|
+  //============
 
-  async ventanaModal() {
-    const modal = await this.modalCtrl.create({
-      component: ModificarUsuarioPage,
-      componentProps: {
-        usuarioJson: JSON.stringify(this.usuarioGlobal),
-        propio: JSON.stringify(true),
-      },
-    });
-    return await modal.present();
+   modificar() {
+    this.router.navigateByUrl('modificar-personal')
   } //end ventanaModal
 
   //======================================================================================================================================
@@ -72,12 +63,9 @@ export class AppComponent implements OnInit {
 
 
   sideMenu() {
-    if (
-      this.usuarioGlobal.musico != undefined &&
-      this.usuarioGlobal.musico.gestor == true
-    )
+    if (this.usuarioGlobal.musico != undefined && this.usuarioGlobal.musico.gestor == true)
       this.navigate = [
-        {
+        { 
           title: 'Noticias',
           url: '/noticias',
           icon: 'newspaper-outline',

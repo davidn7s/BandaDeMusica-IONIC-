@@ -55,6 +55,10 @@ const routes: Routes = [
     path: 'recordar-contrasenna',
     loadChildren: () => import('./recordar-contrasenna/recordar-contrasenna.module').then( m => m.RecordarContrasennaPageModule)
   },
+  {
+    path: 'modificar-personal',
+    loadChildren: () => import('./modificar-personal/modificar-personal.module').then( m => m.ModificarPersonalPageModule)
+  },
 ];
 
 @NgModule({

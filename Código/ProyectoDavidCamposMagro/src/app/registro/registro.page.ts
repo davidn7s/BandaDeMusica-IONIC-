@@ -225,6 +225,7 @@ export class RegistroPage implements OnInit {
       message: 'Registrando usuario ...',
       duration: 20000,
       spinner: 'bubbles',
+      cssClass:'loader-css-class',
       translucent: true,
     });
     await loading.present();

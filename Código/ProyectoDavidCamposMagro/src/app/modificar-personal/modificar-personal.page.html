@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-back-button color="black"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{usuario.nombre}} {{usuario.apellidos}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-item>
+    <ion-label position="floating" color="tertiary">Nombre</ion-label>
+    <ion-input type="text" [(ngModel)]="usuario.nombre"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating" color="tertiary">Apellidos</ion-label>
+    <ion-input type="text" [(ngModel)]="usuario.apellidos"></ion-input>
+  </ion-item>
+
+
+  <!-- Modificaciones adicionales -->
+
+  <h4 (click)="modificarPlus()">Modificar datos de acceso <ion-icon style="text-align: end;"
+      [name]="iconoVer"></ion-icon></h4>
+
+  <div *ngIf="cambiar">
+    <div id="inputscontra">
+      <ion-note>Rellene los siguientes campos para cambiar su contraseña de acceso</ion-note>
+      <ion-item>
+        <ion-label position="floating" color="tertiary">Contraseña actual</ion-label>
+        <ion-input type="password" [(ngModel)]="oldPassword" placeholder="Introduzca su contraseña actual"
+          [type]="mostrarContrassenna1 ? 'text' : 'password'"></ion-input>
+        <ion-icon class="ojo" slot="end" [name]="icono1" (click)="cambiarTipo1()" color="black"></ion-icon>
+        <ion-note color="danger" *ngIf="errorPasswordActual">La contraseña actual no es correcta</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="tertiary">Contraseña nueva</ion-label>
+        <ion-input type="password" [(ngModel)]="newPassword" placeholder="Introduce su nueva contraseña"
+          [type]="mostrarContrassenna2 ? 'text' : 'password'"></ion-input>
+        <ion-icon class="ojo" slot="end" [name]="icono2" (click)="cambiarTipo2()" color="black"></ion-icon>
+        <ion-note color="danger" *ngIf="pattern">La contraseña debe de tener una mayúscula y un número y ser mayor de 8
+          caracteres</ion-note>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating" color="tertiary">Repita su nueva contraseña</ion-label>
+        <ion-input type="password" placeholder="Repita su nueva contraseña" [(ngModel)]="newPasswordRepeat"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" (click)="cambiarContra()" color="warning" [disabled]="controlContrasenna()">Cambiar
+        Contraseña</ion-button>
+
+
+    </div>
+
+    <!-- CONTRASEÑA -->
+    <div id="inputsemail">
+
+      <ion-note>Rellene los siguientes campos para cambiar su correo electrónico de acceso</ion-note>
+
+
+      <ion-item>
+        <ion-label position="floating" color="tertiary">Nuevo E-mail</ion-label>
+        <ion-input type="text" [(ngModel)]="newEmail" placeholder="Introduce su nueva E-mail"></ion-input>
+        <ion-note color="danger" *ngIf="patternMail">No es un correo electrónico</ion-note>
+      </ion-item>
+
+
+      <ion-button expand="block" (click)="cambiarCorreo()" color="warning" [disabled]="controlEmail()">Cambiar
+        E-mail</ion-button>
+
+
+    </div>
+  </div>
+  <ion-button *ngIf="!cambiar" expand="block" (click)="modificarUsuario()" color="tertiary" [disabled]="deshabilitado()">Modificar
+    Usuario</ion-button>
+
+    <ion-grid id="centrar" *ngIf="!cambiar">
+      <ion-row>
+        <ion-col size="12">
+          <ion-img style="height: 13em" src="../../assets/icon/logo.png"></ion-img>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

@@ -145,6 +145,7 @@ export class HomePage {
       message: 'Realizando login ...',
       duration: 20000,
       spinner: 'bubbles',
+      cssClass:'loader-css-class',
       translucent: true,
     });
     await loading.present();
