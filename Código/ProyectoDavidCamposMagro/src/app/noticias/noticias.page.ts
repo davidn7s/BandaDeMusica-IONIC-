@@ -6,6 +6,7 @@ import { FireServiceProvider } from 'src/providers/api-service/fire-service';
 import { GlobalVariablesService } from 'src/services/global-variables.service';
 import { Noticia } from '../../modelo/Noticia';
 import { AppComponent } from '../app.component';
+import { DetalleNoticiaPage } from '../detalle-noticia/detalle-noticia.page';
 import { ModificarNoticiaPage } from '../modificar-noticia/modificar-noticia.page';
 
 @Component({
@@ -121,6 +122,16 @@ export class NoticiasPage implements OnInit {
   async ventanaModal(noticia: Noticia) {
     const modal = await this.modalController.create({
       component: ModificarNoticiaPage,
+      componentProps: {
+        noticiaJson: JSON.stringify(noticia),
+      },
+    });
+    return await modal.present();
+  } //end ventanaModal
+
+  async verDetalles(noticia: Noticia) {
+    const modal = await this.modalController.create({
+      component: DetalleNoticiaPage,
       componentProps: {
         noticiaJson: JSON.stringify(noticia),
       },

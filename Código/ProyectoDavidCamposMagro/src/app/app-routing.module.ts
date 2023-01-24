@@ -59,6 +59,10 @@ const routes: Routes = [
     path: 'modificar-personal',
     loadChildren: () => import('./modificar-personal/modificar-personal.module').then( m => m.ModificarPersonalPageModule)
   },
+  {
+    path: 'detalle-noticia',
+    loadChildren: () => import('./detalle-noticia/detalle-noticia.module').then( m => m.DetalleNoticiaPageModule)
+  },
 ];
 
 @NgModule({

@@ -21,7 +21,7 @@
 ></ion-searchbar>
 <ion-content>
   <ion-list *ngFor="let noticia of noticias  | filtro: textoBuscar: 'titulo'">
-    <ion-card>
+    <ion-card (click)="verDetalles(noticia)">
       <ion-card-header>
         <ion-grid>
           <ion-row>
@@ -42,25 +42,24 @@
             </ion-col>
           </ion-row>
         </ion-grid>
-        <ion-card-subtitle>{{noticia.fecha}}</ion-card-subtitle>
+        
       </ion-card-header>
 
       <ion-card-content>
         <ion-grid>
           <ion-row>
-            <ion-col size="12">
+            <ion-col size="12" class="centrar">
               <img
                 *ngIf="noticia.imagen!=''"
                 src="{{noticia.imagen}}"
+                height="150px"
               />
               <img
                 *ngIf="noticia.imagen==''"
                 src="..\..\assets\icon\logo.png"
+                height="150px"
               />
             </ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col size="12"> {{noticia.contenido}} </ion-col>
           </ion-row>
         </ion-grid>
       </ion-card-content>

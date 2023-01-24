@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button ion-button (click)="closeModal()"><ion-icon name="close"></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+
+    <ion-card-header>
+      <ion-card-title> {{noticia.titulo}}</ion-card-title>
+      <ion-card-subtitle>{{noticia.fecha}}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-row>
+        <img *ngIf="noticia.imagen!=''" src="{{noticia.imagen}}" />
+        <img *ngIf="noticia.imagen==''" src="..\..\assets\icon\logo.png" />
+      </ion-row>
+
+      <ion-row id="contenido">
+        {{noticia.contenido}}
+      </ion-row>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
