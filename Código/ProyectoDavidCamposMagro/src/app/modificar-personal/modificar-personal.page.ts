@@ -82,7 +82,6 @@ export class ModificarPersonalPage implements OnInit {
     this.firebaseService.getUsuarioById(this.globalUsu.id)
       .then((data) => {
         this.usuario = data
-        console.log(data)
       }).catch((error: string) => {
 
       })
@@ -97,9 +96,6 @@ export class ModificarPersonalPage implements OnInit {
 
           this.user.updatePassword(this.newPassword)
             .then(() => {
-              this.oldPassword = '';
-              this.newPassword = '';
-              this.newPasswordRepeat = '';
               this.presentToast('Se ha modificado su contraseña con éxito')
               this.loadingCtrl.dismiss()
             }).catch((error: string) => {
@@ -117,22 +113,21 @@ export class ModificarPersonalPage implements OnInit {
 
     this.user.updateEmail(this.newEmail)
       .then(() => {
-        this.usuario.email=this.newEmail;
-        this.usuario.nombre=this.globalUsu.nombre;
-        this.usuario.apellidos=this.globalUsu.apellidos;
+        this.usuario.email = this.newEmail;
+        this.usuario.nombre = this.globalUsu.nombre;
+        this.usuario.apellidos = this.globalUsu.apellidos;
         this.firebaseService.modificarUsuario(this.usuario)
-        .then(()=>{
-          this.globalUsu=this.usuario;
-          this.globalVariable.usuGlobal=this.usuario;
-          this.appComponent.getGlobalUsu();
-          this.newEmail=null
-          this.presentToast('Se ha modificado su correo con éxito')
-          this.loadingCtrl.dismiss()
-        }).catch(()=>{
-          this.presentToast('Error al actualizar el correo electrónico')
-          this.loadingCtrl.dismiss()
-        })
-        
+          .then(() => {
+            this.globalUsu = this.usuario;
+            this.globalVariable.usuGlobal = this.usuario;
+            this.appComponent.getGlobalUsu();
+            this.presentToast('Se ha modificado su correo con éxito')
+            this.loadingCtrl.dismiss()
+          }).catch(() => {
+            this.presentToast('Error al actualizar el correo electrónico')
+            this.loadingCtrl.dismiss()
+          })
+
       }).catch((error: string) => {
         this.presentToast('Error en el cambio de correo electrónico')
         this.loadingCtrl.dismiss()
@@ -217,6 +212,7 @@ export class ModificarPersonalPage implements OnInit {
       return true;
     if (this.newEmail == '')
       return true
+
     //Evitar problemas de cambiar variable
     setTimeout(() => {
       if (!this.newEmail.match('^[a-zA-Z0-9_.+-]+[@]{1}[a-zA-Z0-9-]+[.]{1}[a-zA-Z]+$')) {
@@ -228,6 +224,8 @@ export class ModificarPersonalPage implements OnInit {
     //Condición necesaria, si no se activaria el botón igualmente
     if (!this.newEmail.match('^[a-zA-Z0-9_.+-]+[@]{1}[a-zA-Z0-9-]+[.]{1}[a-zA-Z]+$'))
       return true
+
+
 
     return false;
   }//end controlEmail
@@ -264,7 +262,7 @@ export class ModificarPersonalPage implements OnInit {
   async presentToast(mensaje: string) {
     const toast = await this.toastController.create({
       message: mensaje,
-      duration: 2000,
+      duration: 2500,
       position: 'bottom'
     });
 

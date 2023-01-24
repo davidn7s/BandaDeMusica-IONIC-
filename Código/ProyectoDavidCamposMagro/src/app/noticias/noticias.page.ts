@@ -49,7 +49,6 @@ export class NoticiasPage implements OnInit {
   ionViewWillEnter() {
     this.appComponent.getGlobalUsu();
     this.globalUsu = this.globalVar.usuGlobal;
-    console.log('Noticia',this.globalUsu)
     if (this.globalUsu.musico != undefined && this.globalUsu.musico.gestor == true)
       this.gestor = true;
   } //end ionViewWillEnter

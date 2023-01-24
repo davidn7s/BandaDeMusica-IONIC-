@@ -35,13 +35,12 @@
         <ion-input type="password" [(ngModel)]="oldPassword" placeholder="Introduzca su contraseña actual"
           [type]="mostrarContrassenna1 ? 'text' : 'password'"></ion-input>
         <ion-icon class="ojo" slot="end" [name]="icono1" (click)="cambiarTipo1()" color="black"></ion-icon>
-        <ion-note color="danger" *ngIf="errorPasswordActual">La contraseña actual no es correcta</ion-note>
       </ion-item>
 
       <ion-item>
         <ion-label position="floating" color="tertiary">Contraseña nueva</ion-label>
         <ion-input type="password" [(ngModel)]="newPassword" placeholder="Introduce su nueva contraseña"
-          [type]="mostrarContrassenna2 ? 'text' : 'password'"></ion-input>
+          [type]="mostrarContrassenna2 ? 'text' : 'password'"  [clearInput]="true"></ion-input>
         <ion-icon class="ojo" slot="end" [name]="icono2" (click)="cambiarTipo2()" color="black"></ion-icon>
         <ion-note color="danger" *ngIf="pattern">La contraseña debe de tener una mayúscula y un número y ser mayor de 8
           caracteres</ion-note>
@@ -49,7 +48,7 @@
 
       <ion-item>
         <ion-label position="floating" color="tertiary">Repita su nueva contraseña</ion-label>
-        <ion-input type="password" placeholder="Repita su nueva contraseña" [(ngModel)]="newPasswordRepeat"></ion-input>
+        <ion-input type="password" placeholder="Repita su nueva contraseña" [(ngModel)]="newPasswordRepeat"  [clearInput]="true"></ion-input>
       </ion-item>
 
       <ion-button expand="block" (click)="cambiarContra()" color="warning" [disabled]="controlContrasenna()">Cambiar
@@ -66,7 +65,7 @@
 
       <ion-item>
         <ion-label position="floating" color="tertiary">Nuevo E-mail</ion-label>
-        <ion-input type="text" [(ngModel)]="newEmail" placeholder="Introduce su nueva E-mail"></ion-input>
+        <ion-input type="text" [(ngModel)]="newEmail" placeholder="Introduce su nueva E-mail"  [clearInput]="true"></ion-input>
         <ion-note color="danger" *ngIf="patternMail">No es un correo electrónico</ion-note>
       </ion-item>
 
