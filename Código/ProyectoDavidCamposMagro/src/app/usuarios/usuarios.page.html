@@ -14,7 +14,7 @@
 <!--Select de tipo-->
 <ion-item>
   <ion-label position="floating" color="tertiary">Tipo</ion-label>
-  <ion-select [(ngModel)]="tipo" (ionChange)="cambioTipo($event)" interface="popover" cancelText="Cancelar"
+  <ion-select [(ngModel)]="tipo" (ionChange)="cambioTipo($event)"  cancelText="Cancelar"
     okText="Aceptar">
     <ion-select-option value="todo">Todo</ion-select-option>
     <ion-select-option value="perteneciente">Pertenece a la banda</ion-select-option>
