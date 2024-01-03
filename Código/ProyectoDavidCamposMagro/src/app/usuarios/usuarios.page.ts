@@ -196,7 +196,6 @@ export class UsuariosPage implements OnInit {
       });
       return await modal.present();
     }else{
-      console.log('A')
       this.router.navigateByUrl('modificar-personal')
     }
     
